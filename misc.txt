@@ -1,0 +1,3 @@
+superuser - johnDoe/johnDoe@example.com/dumbass123
+user1 - testUser/dumbass123
+dhanush/blahblahblah@gmail.com/dumbas123

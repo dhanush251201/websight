@@ -1,0 +1,66 @@
+{% extends 'webinar/base.html'%}
+{% load static %}
+{% block content %}
+<body>
+    <head>
+        <title>LOGIN PAGE</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'users/login.css'%}">
+    </HEAD>
+    <div class="container">
+        <div class="image-wrapper">
+            <img src="{% static 'users/media/login.svg' %}">
+        </div>
+        <div class="d-flex justify-content-center h-100">
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            <div class="card">
+                <div class="card-header card-heading">
+                    <h3>Login</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                    {% csrf_token %}
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username" id="username" name="username" required>
+                            
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+                        </div>
+                       
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn login-btn">
+                        </div>  
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="{% url 'signup' %}" class="signup-qn">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content%}

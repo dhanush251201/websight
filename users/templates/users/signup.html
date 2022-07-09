@@ -1,0 +1,97 @@
+{% extends 'webinar/base.html'%}
+{% load static %}
+{% block content %}
+<body>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'users/signup.css' %}">
+        <title>Signup page</title>        
+    </head>
+    <div class="container">
+        
+        <div class="image-wrapper">
+            <img src="{% static 'users/media/signup.svg' %}" />
+        </div>
+        <div class="card-wrapper">
+        
+            <div class="card">
+                <div class="card-header card-heading">
+                    <h3>Sign up</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-pen-nib"></i></span>
+                                </div>  
+                                <input type="text" class="form-control name-input" placeholder="First Name" id="first_name" name="first_name" maxlength=50 required>
+                                <input type="text" class="form-control" placeholder="Last Name" id="last_name" name="last_name" maxlength=50 required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Username" id="username" name="username" maxlength=50 required>
+                            </div>
+
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Password" id="password1" name="password1" required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Confirm password" id="password2" name="password2" required>
+                            </div>
+                            {% comment %} <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-dna"></i></span>
+                                </div>
+                                <select type="select" class="form-control" id="role" name="role" required>
+                                    <option value="" selected>Select your role</option>
+                                    <option value="Attendee">Attendee</option>
+                                    <option value="Host">Host</option>
+                                </select>
+                            </div> {% endcomment %}
+                            <div class="form-group">
+                                <div class="signup-button">
+                                    <input type="submit" value="Sign Up" class="btn signup-btn">
+                                </div>
+                            </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Already have an account?<a href="{% url 'login' %}" class="login-qn">Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="message">
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}
